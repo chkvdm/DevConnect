@@ -1,0 +1,1049 @@
+{
+	"info": {
+		"_postman_id": "741f58fe-8568-4a52-896b-491ced5430b8",
+		"name": "Capstone Project API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "Registration",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "firstName",
+									"value": "Bill",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Gates",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Microsoft co-founder",
+									"type": "text"
+								},
+								{
+									"key": "summary",
+									"value": "President",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "Bill@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "qwerty0808",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "default",
+									"disabled": true
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/auth/register",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"register"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()",
+									"pm.environment.set(\"admin-jwt\", response.token)",
+									"pm.environment.set(\"admin-id\", response.user.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "brendan@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "adminpassword",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "default",
+									"disabled": true
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/auth/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Login User",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()",
+									"pm.environment.set(\"user-jwt\", response.token)",
+									"pm.environment.set(\"user-id\", response.user.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "email",
+									"value": "Bill@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "qwerty0808",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "default",
+									"disabled": true
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base-url}}/api/auth/login",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"auth",
+								"login"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Users",
+			"item": [
+				{
+					"name": "User Registration by Admin",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()",
+									"pm.environment.set(\"user-id-by-admin\", response.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/vadim/Documents/EPAM_UPSkill_Me/capstone-project/public/user-image.png"
+								},
+								{
+									"key": "firstName",
+									"value": "Ryan",
+									"type": "text"
+								},
+								{
+									"key": "lastName",
+									"value": "Dahl",
+									"type": "text"
+								},
+								{
+									"key": "title",
+									"value": "Software engineer",
+									"type": "text"
+								},
+								{
+									"key": "summary",
+									"value": "Creator of Node.js - JavaScript runtimes",
+									"type": "text"
+								},
+								{
+									"key": "email",
+									"value": "Ryan@test.com",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "aa12345",
+									"type": "text"
+								},
+								{
+									"key": "role",
+									"value": "User",
+									"type": "text"
+								},
+								{
+									"key": "",
+									"value": "",
+									"type": "default",
+									"disabled": true
+								}
+							],
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/users",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Users",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/users?pageSize=10&page=1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"users"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "User by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/users/{{admin-id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{admin-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update User Profile",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user-jwt}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/vadim/Documents/EPAM_UPSkill_Me/capstone-project/public/user-update-image.png"
+								},
+								{
+									"key": "firstName",
+									"value": "Bill",
+									"type": "default"
+								},
+								{
+									"key": "lastName",
+									"value": "Gates",
+									"type": "default"
+								},
+								{
+									"key": "title",
+									"value": "Microsoft co-founder",
+									"type": "text"
+								},
+								{
+									"key": "summary",
+									"value": "President and and chief software architect.",
+									"type": "text"
+								},
+								{
+									"key": "password",
+									"value": "qwerty0808",
+									"type": "default"
+								},
+								{
+									"key": "role",
+									"value": "User",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base-url}}/api/users/{{user-id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user-id}}"
+							],
+							"query": [
+								{
+									"key": "",
+									"value": null,
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete User",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/users/{{user-id-by-admin}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"users",
+								"{{user-id-by-admin}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Experiences",
+			"item": [
+				{
+					"name": "Add Experience",
+					"event": [
+						{
+							"listen": "prerequest",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						},
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()",
+									"pm.environment.set(\"experience-id\", response.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{admin-id}}\",\n    \"companyName\": \"Mozilla Corporation\",\n    \"role\": \"Developer\",\n    \"startDate\": \"2022-05-12\",\n    \"endDate\": \"until now\",\n    \"description\": \"Typescript developer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/experience",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"experience"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Experiences",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/experience?pageSize=10&page=1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"experience"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Experience by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/experience/{{experience-id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"experience",
+								"{{experience-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Experience",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"userId\": \"{{admin-id}}\",\n    \"companyName\": \"Mozilla Corporation\",\n    \"role\": \"Senior developer\",\n    \"startDate\": \"2022-05-12\",\n    \"endDate\": \"until now\",\n    \"description\": \"Typescript senior developer\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/experience/{{experience-id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"experience",
+								"{{experience-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Experience",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/experience/{{experience-id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"experience",
+								"{{experience-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Projects",
+			"item": [
+				{
+					"name": "Add project",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()",
+									"pm.environment.set(\"project-id\", response.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/vadim/Documents/EPAM_UPSkill_Me/capstone-project/public/project-image.png"
+								},
+								{
+									"key": "userId",
+									"value": "{{admin-id}}",
+									"type": "default"
+								},
+								{
+									"key": "description",
+									"value": "Mozilla Firefox - free and open-source web browser.",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base-url}}/api/projects",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Projects",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/projects?pageSize=10&page=1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"projects"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Project by ID",
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base-url}}/api/projects/{{project-id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"{{project-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Project",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "image",
+									"type": "file",
+									"src": "/Users/vadim/Documents/EPAM_UPSkill_Me/capstone-project/public/project-update-image.png"
+								},
+								{
+									"key": "description",
+									"value": "Mozilla Firefox - free and open-source web browser. Total Cookie Protection support has been added",
+									"type": "default"
+								},
+								{
+									"key": "userId",
+									"value": "{{admin-id}}",
+									"type": "default"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base-url}}/api/projects/{{project-id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"{{project-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Project",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/projects/{{project-id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"projects",
+								"{{project-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Feedbacks",
+			"item": [
+				{
+					"name": "Add Feedback",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"const response = pm.response.json()",
+									"pm.environment.set(\"feedback-id\", response.id)"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{user-jwt}}",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromUser\": \"{{user-id}}\",\n    \"companyName\": \"Mozilla Corporation\",\n    \"toUser\": \"{{admin-id}}\",\n    \"content\": \"You create amazing product!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/feedback",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"feedback"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "All Feedbacks",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/feedback?pageSize=10&page=1",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"feedback"
+							],
+							"query": [
+								{
+									"key": "pageSize",
+									"value": "10"
+								},
+								{
+									"key": "page",
+									"value": "1"
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Feedback by ID",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/feedback/{{feedback-id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"feedback",
+								"{{feedback-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update Feedback",
+					"request": {
+						"method": "PUT",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImQwZTc2YmUyLTExYTktNGI2OS1hZjI2LTc2NDRkNGMxODkxMyIsImlhdCI6MTY4Mzk2Mzg0NX0.s_HsBGcRmjghYzfMVyrBPKQkAp9ySBgSVUCl0rglr7k",
+								"type": "default"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"fromUser\": \"{{user-id}}\",\n    \"companyName\": \"Mozilla Corporation\",\n    \"toUser\": \"{{admin-id}}\",\n    \"content\": \"You create amazing product! Mozila greate browser!\"\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base-url}}/api/feedback/{{feedback-id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"feedback",
+								"{{feedback-id}}"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Feedback",
+					"request": {
+						"method": "DELETE",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/feedback/{{feedback-id}}",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"feedback",
+								"{{feedback-id}}"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "CV",
+			"item": [
+				{
+					"name": "User CV",
+					"request": {
+						"method": "GET",
+						"header": [
+							{
+								"key": "Authorization",
+								"value": "Bearer {{admin-jwt}}",
+								"type": "default"
+							}
+						],
+						"url": {
+							"raw": "{{base-url}}/api/user/{{admin-id}}/cv",
+							"host": [
+								"{{base-url}}"
+							],
+							"path": [
+								"api",
+								"user",
+								"{{admin-id}}",
+								"cv"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"variable": [
+		{
+			"key": "userId",
+			"value": ""
+		}
+	]
+}
