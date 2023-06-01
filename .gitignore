@@ -1,0 +1,14 @@
+node_modules/
+dist/
+.vscode/
+junit.xml
+xunit.xml
+.env
+.DS_Store
+.prettierrc
+public/*
+!/public/default.png
+!/public/project-image.png
+!/public/project-update-image.png
+!/public/user-image.png
+!/public/user-update-image.png
